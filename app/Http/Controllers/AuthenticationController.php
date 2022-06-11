@@ -10,6 +10,47 @@ use Validator;
 class AuthenticationController extends Controller
 {
 
+
+    /**
+     * Create Account
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function register(Request $request)
+    {
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone_number' => 'required|numeric',
+            'email' => 'required|email|unique:users,email',
+            'position' => 'required',
+            'password' => 'required',
+            'access_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'message' => $validator->errors()->first(),
+            ], 400);
+        }
+
+        $input['role'] = ($request->type == 'Program') ? 'Regular' : 'Admin';
+        $input['access_id'] = $request->access_id;
+        $user = User::create($input);
+
+        return response([
+            'message' => 'Registration completed successfully.',
+            'data' => [
+                'user' => $user
+            ]
+        ], 200);
+    }
+
+
+
     /**
      * User Login
      * 

@@ -16,6 +16,7 @@ use App\Http\Controllers\ProgramController;
 
 // Public Routes
 Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/register', [AuthenticationController::class, 'register']);
 
 
 // Protected Routes
@@ -120,24 +121,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-
-
-
-
-
-    // Conversations Routes
-    Route::get('/conversations', [ConversationsController::class, 'index']);
-    Route::get('/conversations/{id}', [ConversationsController::class, 'show']);
-    Route::post('/conversations', [ConversationsController::class, 'store']);
-    Route::put('/conversations/{id}', [ConversationsController::class, 'update']);
-    Route::delete('/conversations/{id}', [ConversationsController::class, 'delete']);
-    Route::patch('/conversations/{id}/status', [ConversationsController::class, 'updateStatus']);
-
-    // Messages Routes
-    Route::get('/messages', [MessagesController::class, 'index']);
-    Route::get('/messages/{id}', [MessagesController::class, 'show']);
-    Route::post('/messages', [MessagesController::class, 'store']);
-    Route::delete('/messages/{id}', [MessagesController::class, 'delete']);
 
 
     // Logout User
