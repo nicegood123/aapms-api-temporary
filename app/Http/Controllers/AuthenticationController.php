@@ -37,6 +37,7 @@ class AuthenticationController extends Controller
             ], 400);
         }
 
+        $input['password'] = bcrypt($input['password']);
         $input['role'] = ($request->type == 'Program') ? 'Regular' : 'Admin';
         $input['access_id'] = $request->access_id;
         $user = User::create($input);
@@ -63,7 +64,7 @@ class AuthenticationController extends Controller
         $input = $request->all();
 
         $validate = Validator::make($input, [
-            'email_address' => 'required|email',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
@@ -74,12 +75,18 @@ class AuthenticationController extends Controller
         }
 
         // Check Email
-        $user = User::where('email_address', $input['email_address'])->first();
+        $user = User::where('email', $input['email'])->first();
 
         // Check Password
         if (!$user || !Hash::check($input['password'], $user->password)) {
             return response([
                 'message' => "Your password is incorrect or this account doesn't exist. Please try again."
+            ], 401);
+        }
+
+        if($user->status == 'Inactive') {
+            return response([
+                'message' => "Your account has not been activated yet."
             ], 401);
         }
 
@@ -89,6 +96,7 @@ class AuthenticationController extends Controller
             'data' => [
                 'user' => $user,
                 'token' => $token,
+                'status' => $user->status,
             ]
         ], 200);
     }
