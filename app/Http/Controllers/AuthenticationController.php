@@ -26,8 +26,8 @@ class AuthenticationController extends Controller
             'lastname' => 'required',
             'phone_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email',
-            'position' => 'required',
             'password' => 'required',
+            'position' => 'required',
             'access_id' => 'required',
         ]);
 
@@ -96,7 +96,6 @@ class AuthenticationController extends Controller
             'data' => [
                 'user' => $user,
                 'token' => $token,
-                'status' => $user->status,
             ]
         ], 200);
     }
