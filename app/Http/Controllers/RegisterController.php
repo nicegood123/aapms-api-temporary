@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 
 class RegisterController extends Controller
 {
-        /**
+
+    /**
      * Create Account
      * 
      * @param Request $request
@@ -44,6 +46,27 @@ class RegisterController extends Controller
             'data' => [
                 'user' => $user
             ]
+        ], 200);
+    }
+
+
+    /**
+     * Get Types (Institutional, College, Program)
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function getType(Request $request)
+    {
+      
+    $types = Type::getTypes($request);
+
+        return response([
+            'message' => 'Types Retrieved.',
+            'data' => [
+                'types' => $types
+            ]
+   
         ], 200);
     }
 }
