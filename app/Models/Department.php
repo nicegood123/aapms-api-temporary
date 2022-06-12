@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 
-class Type extends Model
+class Department extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -20,23 +20,23 @@ class Type extends Model
 
 
     /**
-     * Get List of Types
+     * Get List of Departments
      * 
      * @return Response
      */
-    public static function getTypes(Request $request)
+    public static function getDepartments(Request $request)
     {
-        $query = Type::latest();
-        if ($request->type == 'Institutional') {
+        $query = Department::latest();
+        if ($request->department == 'Institutional') {
             $query->where('isInstitutional', 1);
-        } elseif ($request->type == 'College') {
+        } elseif ($request->department == 'College') {
             $query->where('isInstitutional', 0);
-        } elseif ($request->type == 'Program') {
+        } elseif ($request->department == 'Program') {
             $query = Program::latest();
         }
 
-        $types = $query->paginate(10);
+        $departments = $query->paginate(10);
 
-        return $types;
+        return $departments;
     }
 }

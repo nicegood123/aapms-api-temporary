@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Type;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -51,20 +51,20 @@ class RegisterController extends Controller
 
 
     /**
-     * Get Types (Institutional, College, Program)
+     * Get Departments (Institutional, College, Program)
      * 
      * @param Request $request
      * @return Response
      */
-    public function getType(Request $request)
+    public function getDepartment(Request $request)
     {
       
-    $types = Type::getTypes($request);
+    $departments = Department::getDepartments($request);
 
         return response([
-            'message' => 'Types Retrieved.',
+            'message' => 'Departments Retrieved.',
             'data' => [
-                'types' => $types
+                'departments' => $departments
             ]
    
         ], 200);

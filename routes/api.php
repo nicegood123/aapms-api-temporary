@@ -6,10 +6,8 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ConversationsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackSourceController;
-use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RegisterController;
@@ -17,7 +15,7 @@ use App\Http\Controllers\RegisterController;
 // Public Routes
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/register/type', [RegisterController::class, 'getType']);
+Route::get('/register/departments', [RegisterController::class, 'getDepartment']);
 
 
 // Protected Routes
