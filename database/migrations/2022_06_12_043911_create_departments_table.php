@@ -17,7 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->longText('description');
-            $table->boolean('isInstitutional')->default(0);
+            $table->boolean('is_institutional')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

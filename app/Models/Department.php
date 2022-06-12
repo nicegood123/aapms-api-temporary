@@ -15,7 +15,7 @@ class Department extends Model
     protected $fillable = [
         'name',
         'description',
-        'isInstitutional'
+        'is_institutional'
     ];
 
 
@@ -28,14 +28,14 @@ class Department extends Model
     {
         $query = Department::latest();
         if ($request->department == 'Institutional') {
-            $query->where('isInstitutional', 1);
+            $query->where('is_institutional', 1);
         } elseif ($request->department == 'College') {
-            $query->where('isInstitutional', 0);
+            $query->where('is_institutional', 0);
         } elseif ($request->department == 'Program') {
             $query = Program::latest();
         }
 
-        $departments = $query->paginate(10);
+        $departments = $query->paginate(5);
 
         return $departments;
     }
