@@ -26,13 +26,26 @@ class Department extends Model
      */
     public static function getDepartments(Request $request)
     {
-        $query = Department::latest();
+        $query = Department::whereRaw(
+            '(name LIKE ? OR description LIKE ?)',
+            [
+                '%' . $request->search . '%',
+                '%' . $request->search . '%'
+            ]
+        );
+
         if ($request->department == 'Institutional') {
             $query->where('is_institutional', 1);
         } elseif ($request->department == 'College') {
             $query->where('is_institutional', 0);
         } elseif ($request->department == 'Program') {
-            $query = Program::latest();
+            $query = Program::whereRaw(
+                '(name LIKE ? OR description LIKE ?)',
+                [
+                    '%' . $request->search . '%',
+                    '%' . $request->search . '%'
+                ]
+            );
         }
 
         $departments = $query->paginate(5);
