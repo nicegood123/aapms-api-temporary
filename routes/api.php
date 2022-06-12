@@ -12,11 +12,11 @@ use App\Http\Controllers\FeedbackSourceController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProgramController;
-
+use App\Http\Controllers\RegisterController;
 
 // Public Routes
 Route::post('/login', [AuthenticationController::class, 'login']);
-Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'register']);
 
 
 // Protected Routes
