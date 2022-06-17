@@ -37,7 +37,7 @@ class RegisterController extends Controller
         }
 
         $input['password'] = bcrypt($input['password']);
-        $input['role'] = ($request->type == 'Program') ? 'Regular' : 'Admin';
+        $input['role'] = ($request->department == 'Program') ? 'Regular' : 'Admin';
         $input['access_id'] = $request->access_id;
         $user = User::create($input);
 
