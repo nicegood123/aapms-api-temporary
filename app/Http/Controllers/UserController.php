@@ -67,8 +67,8 @@ class UserController extends Controller
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email_address' => 'required|email|unique:users,email_address',
-            'phone_number' => 'required|numeric',
+            'email' => 'required|email|unique:users,email',
+            'mobile_number' => 'required|numeric',
             'position' => 'required',
             'role' => 'required',
         ]);
@@ -123,8 +123,8 @@ class UserController extends Controller
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email_address' => 'required|email',
-            'phone_number' => 'required|numeric',
+            'email' => 'required|email',
+            'mobile_number' => 'required|numeric',
             'position' => 'required',
             'role' => 'required',
         ]);
@@ -139,8 +139,8 @@ class UserController extends Controller
         $user->firstname = $input['firstname'];
         $user->lastname = $input['lastname'];
         $user->username = $input['username'];
-        $user->phone_number = $input['phone_number'];
-        $user->email_address = $input['email_address'];
+        $user->mobile_number = $input['mobile_number'];
+        $user->email = $input['email'];
         $user->role = $input['role'];
         $user->position = $input['position'];
         $user->save();

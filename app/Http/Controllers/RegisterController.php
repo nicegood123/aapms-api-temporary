@@ -23,10 +23,9 @@ class RegisterController extends Controller
         $validator = Validator::make($input, [
             'firstname' => 'required',
             'lastname' => 'required',
-            'phone_number' => 'required|numeric',
+            'mobile_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'position' => 'required',
             'access_id' => 'required',
         ]);
 
@@ -37,7 +36,6 @@ class RegisterController extends Controller
         }
 
         $input['password'] = bcrypt($input['password']);
-        $input['role'] = ($request->department == 'Program') ? 'Regular' : 'Admin';
         $input['access_id'] = $request->access_id;
         $user = User::create($input);
 

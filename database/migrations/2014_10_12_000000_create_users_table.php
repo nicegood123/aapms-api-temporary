@@ -17,17 +17,19 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('phone_number')->unique();
+            $table->bigInteger('mobile_number');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('position');
-            $table->enum('role', ['Super Admin', 'Admin', 'Regular']);
-            $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
-            $table->bigInteger('access_id')->default('0');
-            $table->softDeletes();
+            $table->string('position')->nullable();
+            // $table->enum('role', ['Super Admin', 'Admin', 'Regular']);
+            $table->enum('status', ['Pending', 'Declined', 'Approved'])->default('Pending');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->bigInteger('access_id')->default('0');
+            $table->enum('access_to', ['College', 'Program']);
+
         });
     }
 
