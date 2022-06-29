@@ -15,21 +15,20 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->bigInteger('mobile_number');
+            $table->string('firstname')->nullable();
+            $table->string('middlename')->nullable();
+            $table->string('lastname')->nullable();
+            $table->bigInteger('mobile_number')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('position')->nullable();
-            // $table->enum('role', ['Super Admin', 'Admin', 'Regular']);
-            $table->enum('status', ['Pending', 'Declined', 'Approved'])->default('Pending');
+            $table->tinyInteger('user_types')->default(0);
+            $table->tinyInteger('manage_users')->default(0);
+            $table->tinyInteger('view_reports')->default(0);
+            $table->tinyInteger('active')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
-            $table->bigInteger('access_id')->default('0');
-            $table->enum('access_to', ['College', 'Program']);
-
         });
     }
 
