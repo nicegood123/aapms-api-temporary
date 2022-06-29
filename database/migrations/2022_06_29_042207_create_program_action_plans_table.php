@@ -15,7 +15,8 @@ class CreateProgramActionPlansTable extends Migration
     {
         Schema::create('program_action_plans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->bigInteger('program_id');
+            $table->bigInteger('action_plan_id');
         });
     }
 
