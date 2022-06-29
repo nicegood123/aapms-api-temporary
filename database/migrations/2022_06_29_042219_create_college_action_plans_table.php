@@ -15,7 +15,8 @@ class CreateCollegeActionPlansTable extends Migration
     {
         Schema::create('college_action_plans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->bigInteger('college_id');
+            $table->bigInteger('action_plan_id');
         });
     }
 
