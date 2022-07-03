@@ -7,15 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
-class AuthenticationController extends Controller
+class AuthController extends Controller
 {
 
-    /**
-     * User Login
-     * 
-     * @param Request $request
-     * @return Response
-     */
+    // Login
     public function login(Request $request)
     {
 
@@ -42,7 +37,7 @@ class AuthenticationController extends Controller
             ], 401);
         }
 
-        if($user->status == 'Inactive') {
+        if ($user->active == 0) {
             return response([
                 'message' => "Your account has not been activated yet."
             ], 401);
@@ -58,12 +53,7 @@ class AuthenticationController extends Controller
         ], 200);
     }
 
-
-    /**
-     * User Logout
-     * 
-     * @return Response
-     */
+    // Logout
     public function logout()
     {
         auth()->user()->tokens()->delete();

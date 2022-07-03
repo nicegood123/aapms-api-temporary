@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ActionPlanController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\CommentController;
@@ -13,7 +13,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RegisterController;
 
 // Public Routes
-Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/register/departments', [RegisterController::class, 'getDepartment']);
 
@@ -123,5 +123,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // Logout User
-    Route::post('/logout', [AuthenticationController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

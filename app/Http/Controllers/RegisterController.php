@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -10,12 +9,8 @@ use Validator;
 class RegisterController extends Controller
 {
 
-    /**
-     * Create Account
-     * 
-     * @param Request $request
-     * @return Response
-     */
+
+    // Account Registration
     public function register(Request $request)
     {
         $input = $request->all();
@@ -26,7 +21,7 @@ class RegisterController extends Controller
             'mobile_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'access_id' => 'required',
+            'position' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -36,13 +31,12 @@ class RegisterController extends Controller
         }
 
         $input['password'] = bcrypt($input['password']);
-        $input['access_id'] = $request->access_id;
         $user = User::create($input);
 
         return response([
             'message' => 'Registration completed successfully.',
             'data' => [
-                'user' => $user
+                'user' => $user,
             ]
         ], 200);
     }
