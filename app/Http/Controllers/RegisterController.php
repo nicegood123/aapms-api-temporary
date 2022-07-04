@@ -12,9 +12,9 @@ class RegisterController extends Controller
     // Account Registration
     public function register(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
             'mobile_number' => 'required|numeric',
@@ -30,8 +30,8 @@ class RegisterController extends Controller
             ], 400);
         }
 
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+        $request->password = bcrypt($request->password);
+        $user = User::create($request->all());
 
         return response([
             'message' => 'Registration completed successfully.',

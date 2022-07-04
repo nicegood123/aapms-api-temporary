@@ -18,6 +18,7 @@ class CreateProgramsTable extends Migration
             $table->foreignId('college_id');
             $table->string('name')->unique()->nullable();
             $table->longText('description')->nullable();
+            $table->tinyInteger('is_institutional')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });
