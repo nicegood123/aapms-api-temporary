@@ -9,7 +9,6 @@ use Validator;
 class RegisterController extends Controller
 {
 
-
     // Account Registration
     public function register(Request $request)
     {
@@ -21,6 +20,7 @@ class RegisterController extends Controller
             'mobile_number' => 'required|numeric',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
+            'confirm_password' => 'required|same:password',
             'position' => 'required',
         ]);
 
@@ -42,23 +42,5 @@ class RegisterController extends Controller
     }
 
 
-    /**
-     * Get Departments (Institutional, College, Program)
-     * 
-     * @param Request $request
-     * @return Response
-     */
-    public function getDepartment(Request $request)
-    {
-      
-    $departments = Department::getDepartments($request);
 
-        return response([
-            'message' => 'Departments Retrieved.',
-            'data' => [
-                'departments' => $departments
-            ]
-   
-        ], 200);
-    }
 }

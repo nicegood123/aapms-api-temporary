@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('user_types')->default(0);
             $table->tinyInteger('manage_users')->default(0);
             $table->tinyInteger('view_reports')->default(0);
+            $table->tinyInteger('is_institutional')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->tinyInteger('active')->default(0);
