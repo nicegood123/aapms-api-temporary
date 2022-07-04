@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CollegeUser;
+use App\Models\ProgramUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -12,8 +14,6 @@ class RegisterController extends Controller
     // Account Registration
     public function register(Request $request)
     {
-        // $input = $request->all();
-
         $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
@@ -22,6 +22,8 @@ class RegisterController extends Controller
             'password' => 'required',
             'confirm_password' => 'required|same:password',
             'position' => 'required',
+            'type' => 'required',
+            'type_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -30,8 +32,15 @@ class RegisterController extends Controller
             ], 400);
         }
 
-        $request['password'] = bcrypt($request['password']);
+        $request['user_types'] = ($request->type == 'College') ? 2 : 1;
+        $request['password'] = bcrypt($request->password);
         $user = User::create($request->all());
+
+        if ($request->type == 'College') {
+            CollegeUser::addCollegeUser($request->type_id, $user->id);
+        } else {
+            ProgramUser::addProgramuser($request->type_id, $user->id);
+        }
 
         return response([
             'message' => 'Registration completed successfully.',
@@ -40,7 +49,4 @@ class RegisterController extends Controller
             ]
         ], 200);
     }
-
-
-
 }

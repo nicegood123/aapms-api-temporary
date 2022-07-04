@@ -14,9 +14,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        $input = $request->all();
+        // $input = $request->all();
 
-        $validate = Validator::make($input, [
+        $validate = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
         ]);
@@ -28,10 +28,10 @@ class AuthController extends Controller
         }
 
         // Check Email
-        $user = User::where('email', $input['email'])->first();
+        $user = User::where('email', $request['email'])->first();
 
         // Check Password
-        if (!$user || !Hash::check($input['password'], $user->password)) {
+        if (!$user || !Hash::check($request['password'], $user->password)) {
             return response([
                 'message' => "Your password is incorrect or this account doesn't exist. Please try again."
             ], 401);

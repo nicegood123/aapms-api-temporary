@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProgramUser extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'program_id',
@@ -15,16 +16,12 @@ class ProgramUser extends Model
     ];
 
     // Add New Program User
-    public function addProgramUser(Request $request)
+    public function addProgramUser($program_id, $user_id)
     {
-
-        // if ($request->type == "") {
-        //     return response([
-        //         'message' => "Type is required.",
-        //     ], 400);
-        // }
-
-        $programUser = ProgramUser::create($request);
+        $programUser = ProgramUser::create([
+            'program_id' => $program_id,
+            'user_id' => $user_id
+        ]);
 
         return response([
             'message' => 'Program User Added.',
