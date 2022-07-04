@@ -22,10 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('position')->nullable();
-            $table->tinyInteger('user_types')->default(0);
+            $table->tinyInteger('user_types')->default(1);
             $table->tinyInteger('manage_users')->default(0);
             $table->tinyInteger('view_reports')->default(0);
-            // $table->tinyInteger('is_institutional')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->tinyInteger('active')->default(0);

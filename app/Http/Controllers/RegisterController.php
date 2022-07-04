@@ -30,7 +30,7 @@ class RegisterController extends Controller
             ], 400);
         }
 
-        $request->password = bcrypt($request->password);
+        $request['password'] = bcrypt($request['password']);
         $user = User::create($request->all());
 
         return response([
