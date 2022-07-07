@@ -15,7 +15,7 @@ use App\Http\Controllers\RegisterController;
 // Public Routes
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/register/departments', [RegisterController::class, 'getDepartment']);
+Route::get('/register/types', [RegisterController::class, 'getTypes']);
 
 
 // Protected Routes
